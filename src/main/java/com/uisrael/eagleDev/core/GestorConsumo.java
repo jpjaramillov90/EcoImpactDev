@@ -6,7 +6,6 @@ import com.uisrael.eagleDev.model.Electrodomestico;
 import com.uisrael.eagleDev.model.IFuenteEnergia;
 import com.uisrael.eagleDev.model.PanelSolar;
 import com.uisrael.eagleDev.model.RedElectrica;
-import com.uisrael.eagleDev.core.RegistroConsumo;
 
 /**
  * Lógica de negocio del sistema EcoConsumo.

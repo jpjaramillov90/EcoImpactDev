@@ -23,3 +23,5 @@ public class RegistroConsumo {
         return String.format("%s: %.2f kWh → $%.2f | %.2f kgCO₂",
                 fuente.getNombre(), kWh, getCosto(), getEmisiones());
     }
+
+}
