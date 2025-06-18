@@ -15,6 +15,7 @@ public class GestorConsumo {
     private final Map<String, IFuenteEnergia> fuentes = new TreeMap<>();
 
     public GestorConsumo() {
+        // Los nombres de las fuentes ahora se manejan en sus propias clases al extender FuenteEnergiaBase
         fuentes.put("Solar", new PanelSolar());
         fuentes.put("Red", new RedElectrica());
     }
@@ -22,20 +23,37 @@ public class GestorConsumo {
     public void agregarElectrodomestico(String nombre, double consumo) {
         dispositivos.add(new Electrodomestico(nombre, consumo));
         acciones.push("Agregado: " + nombre);
+        System.out.println("Electrodoméstico '" + nombre + "' agregado."); // ***MEJORA: Feedback al usuario***
     }
 
     public void eliminarElectrodomestico(String nombre) {
         boolean eliminado = dispositivos.removeIf(d -> d.getNombre().equalsIgnoreCase(nombre));
-        if (eliminado) acciones.push("Eliminado: " + nombre);
+        if (eliminado) {
+            acciones.push("Eliminado: " + nombre);
+            System.out.println("Electrodoméstico '" + nombre + "' eliminado."); // ***MEJORA: Feedback al usuario***
+        } else {
+            System.out.println("Electrodoméstico '" + nombre + "' no encontrado."); // ***MEJORA: Feedback al usuario***
+        }
     }
 
     public void simularConsumo(String fuenteNombre, double horas) {
         IFuenteEnergia fuente = fuentes.get(fuenteNombre);
-        if (fuente == null) return;
+        if (fuente == null) {
+            System.out.println("Fuente de energía no encontrada: " + fuenteNombre); // ***CORRECCIÓN/MEJORA: Feedback al usuario***
+            return;
+        }
 
+        if (dispositivos.isEmpty()) {
+            System.out.println("No hay electrodomésticos para simular. Agregue algunos primero."); // ***MEJORA: Feedback al usuario***
+            return;
+        }
+
+        System.out.println("\nSimulando consumo con " + fuente.getNombre() + " por " + horas + " horas:"); // ***MEJORA: Feedback al usuario***
         for (Electrodomestico d : dispositivos) {
             double kWh = d.getConsumoPorHora() * horas;
-            historial.add(new RegistroConsumo(fuente, kWh));
+            RegistroConsumo registro = new RegistroConsumo(fuente, kWh);
+            historial.add(registro);
+            System.out.println("  " + d.getNombre() + ": " + registro.getResumen()); // ***MEJORA: Mostrar resultados de simulación inmediatamente***
         }
         acciones.push("Simulación: " + fuente.getNombre());
     }
@@ -55,9 +73,4 @@ public class GestorConsumo {
     public Stack<String> getAcciones() {
         return acciones;
     }
-
-    public void deshacer() {
-        if (!acciones.isEmpty()) acciones.pop();
-    }
-
 }
