@@ -85,7 +85,7 @@ public class Main {
 
                     String fuente;
                     while (true) {
-                    System.out.print("Ingrese el nombre de la fuente de energía (Solar o Red): "); // ***MEJORA: Guía al usuario***
+                    System.out.print("Ingrese el nombre de la fuente de energía (Solar , Red o Eolica): "); // ***MEJORA: Guía al usuario***
                     fuente = sc.nextLine();
                     if (Validaciones.ValidarFENombre(fuente)){
                         break;
