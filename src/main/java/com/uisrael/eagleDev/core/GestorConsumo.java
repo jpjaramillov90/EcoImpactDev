@@ -1,6 +1,7 @@
 package com.uisrael.eagleDev.core;
 
 import com.uisrael.eagleDev.model.Electrodomestico;
+import com.uisrael.eagleDev.model.EnergiaEolica;
 import com.uisrael.eagleDev.model.IFuenteEnergia;
 import com.uisrael.eagleDev.model.PanelSolar;
 import com.uisrael.eagleDev.model.RedElectrica;
@@ -18,6 +19,7 @@ public class GestorConsumo {
         // Los nombres de las fuentes ahora se manejan en sus propias clases al extender FuenteEnergiaBase
         fuentes.put("Solar", new PanelSolar());
         fuentes.put("Red", new RedElectrica());
+        fuentes.put("Eolica", new EnergiaEolica());
     }
 
     public void agregarElectrodomestico(String nombre, double consumo) {
