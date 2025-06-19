@@ -2,6 +2,7 @@ package com.uisrael.eagleDev;
 
 import com.uisrael.eagleDev.core.GestorConsumo;
 import com.uisrael.eagleDev.core.RegistroConsumo;
+import com.uisrael.eagleDev.core.Validaciones;
 import com.uisrael.eagleDev.model.Electrodomestico; // ***MEJORA: Importar Electrodomestico para tipo específico***
 import com.uisrael.eagleDev.resources.MenuDisplay;
 
@@ -24,10 +25,29 @@ public class Main {
 
             switch (op) {
                 case 1: {
-                    System.out.print("Nombre del electrodoméstico: "); // ***MEJORA: Clarificar el mensaje***
-                    String nombre = sc.nextLine();
-                    System.out.print("Consumo por hora (kWh/h): "); // ***MEJORA: Clarificar el mensaje***
-                    double consumo = sc.nextDouble();
+                    String nombre;
+                    while (true) {
+                        System.out.print("Nombre del electrodoméstico: "); // ***MEJORA: Clarificar el mensaje***
+                        nombre = sc.nextLine();
+                        if (Validaciones.ValidarNombre(nombre)){
+                            break;
+                        }else{
+                            System.out.println("El nombre solo debe contener letras.Intente nuevamente");
+                        }
+                    }
+                    
+                     double consumo;
+                     while (true) {
+                        System.out.print("Consumo por hora (kWh/h): "); // ***MEJORA: Clarificar el mensaje***
+                        String input = sc.nextLine();
+                        if (Validaciones.ValidarConsumo(input)) {
+                            consumo = Double.parseDouble(input);
+                            break;
+                        }else{
+                            System.out.println("Valor incorrecto.Ingrese un numero valido y positivo");
+                        }
+                    }
+
                     sc.nextLine(); // Consumir el salto de línea
                     gestor.agregarElectrodomestico(nombre, consumo);
                     break;
