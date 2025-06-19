@@ -29,7 +29,7 @@ public class Main {
                     while (true) {
                         System.out.print("Nombre del electrodoméstico: "); // ***MEJORA: Clarificar el mensaje***
                         nombre = sc.nextLine();
-                        if (Validaciones.ValidarNombre(nombre)){
+                        if (Validaciones.ValidarNombre(nombre)){ //*MEJORA : Validaciones de entrada */
                             break;
                         }else{
                             System.out.println("El nombre solo debe contener letras.Intente nuevamente");
@@ -40,7 +40,7 @@ public class Main {
                      while (true) {
                         System.out.print("Consumo por hora (kWh/h): "); // ***MEJORA: Clarificar el mensaje***
                         String input = sc.nextLine();
-                        if (Validaciones.ValidarConsumo(input)) {
+                        if (Validaciones.ValidarConsumo(input)) { //*MEJORA : Validaciones de entrada */
                             consumo = Double.parseDouble(input);
                             break;
                         }else{
@@ -49,7 +49,7 @@ public class Main {
                     }
 
                     gestor.agregarElectrodomestico(nombre, consumo);
-                    System.out.println("Dispositivo ingresado correctamente ");
+                    System.out.println("Dispositivo ingresado correctamente");
                     break;
                 }
                 case 2: {
@@ -82,11 +82,32 @@ public class Main {
                     break;
                 }
                 case 5: {
-                    System.out.print("Ingrese el nombre de la fuente de energía (Ej: Solar, Red): "); // ***MEJORA: Guía al usuario***
-                    String fuente = sc.nextLine();
+
+                    String fuente;
+                    while (true) {
+                    System.out.print("Ingrese el nombre de la fuente de energía (Solar o Red): "); // ***MEJORA: Guía al usuario***
+                    fuente = sc.nextLine();
+                    if (Validaciones.ValidarFENombre(fuente)){
+                        break;
+                    }else{
+                            System.out.println("El nombre solo debe contener letras.Intente nuevamente");
+                    }
+                    
+                    }    
+
+                    double horas;
+                    while (true) {
                     System.out.print("Ingrese el número de horas a simular: ");
-                    double horas = sc.nextDouble();
-                    sc.nextLine(); // Consumir el salto de línea
+                    String input = sc.nextLine();
+
+                    if (Validaciones.ValidarFEHoras(input)) {
+                        horas = Double.parseDouble(input);
+                        break;
+                    }else{
+                            System.out.println("Valor incorrecto.Ingrese un numero valido y positivo");
+                    }
+                    }
+
                     gestor.simularConsumo(fuente, horas);
                     break;
                 }

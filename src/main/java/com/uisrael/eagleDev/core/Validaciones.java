@@ -15,4 +15,18 @@ public class Validaciones {
         }
     }
 
+    
+    public static boolean ValidarFENombre(String fuente){
+        return fuente.matches("[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+");
+    }
+
+        public static boolean ValidarFEHoras(String input){
+        try{
+            double horas = Double.parseDouble(input);
+            return horas >0;
+        }catch (NumberFormatException exception){
+            return false;
+        }
+    }
+
 }
