@@ -48,8 +48,8 @@ public class Main {
                         }
                     }
 
-                    sc.nextLine(); // Consumir el salto de línea
                     gestor.agregarElectrodomestico(nombre, consumo);
+                    System.out.println("Dispositivo ingresado correctamente ");
                     break;
                 }
                 case 2: {
